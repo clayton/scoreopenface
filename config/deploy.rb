@@ -13,7 +13,7 @@ set :user, "deploy"
 set :scm, :git
 role :web, "96.126.114.228"
 role :app, "96.126.114.228"
-role :db,  "96.126.114.228"
+role :db,  "96.126.114.228", :primary => true
 
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
