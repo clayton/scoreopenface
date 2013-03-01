@@ -1,0 +1,38 @@
+<h2>Open Face Game Between <%= @game.players_title %></h2>
+<p class="alert">To share or return to this game later, bookmark this page.</p>
+<% if @game.scored_hands.count > 0 %>
+<h3>Score After <%= @game.scored_hands.count %> Hands</h3>
+<table class="table table-bordered table-condensed">
+	<thead>
+		<tr>
+			<% @game.player_scores.keys.sort.each do |player| %>
+				<th><%= player %></th>
+			<% end %>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<% @game.player_scores.each do |player, score| %>
+				<td><%= score %></td>
+			<% end %>
+		</tr>
+	</tbody>
+</table>
+<% end %>
+<h3>Score a New Hand</h3>
+<%= form_for [@game, @scored_hand] do |f| %>
+	<% @game.players_array.sort.each do |player| %>
+		<h4><%= player %> Pays...</h4>
+		<div class="row">
+			<% @game.players_excluding(player).each do |other_player| %>
+			<div class="span2">
+				<div class="control-group">
+					<%= label_tag "hand[#{player}][#{other_player}]", other_player %>
+					<%= select_tag "hand[#{player}][#{other_player}]", options_for_select((0..100).to_a), :class=>"input-mini" %>
+				</div>			
+			</div>
+			<% end %>
+		</div>
+	<% end %>
+		<%= submit_tag "Score Hand", :class=>"btn btn-primary" %>
+<% end %>
