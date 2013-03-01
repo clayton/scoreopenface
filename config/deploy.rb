@@ -7,7 +7,7 @@ set :default_environment, {
 set :application, "scoreopenface"
 set :repository,  "git@github.com:clayton/scoreopenface.git"
 
-set :deploy_to, "/home/deploy/apps"
+set :deploy_to, "/home/deploy/apps/scoreopenface"
 set :use_sudo, false
 set :user, "deploy"
 set :scm, :git
